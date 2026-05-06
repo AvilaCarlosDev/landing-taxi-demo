@@ -21,7 +21,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-[80vh] lg:min-h-[90vh] bg-gray-50">
       {/* Header */}
       <header className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-gray-900 sticky top-0 z-50 shadow-2xl">
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12 py-6">
@@ -51,7 +51,7 @@ function App() {
                 📞 0412-000-0000
               </a>
               <a href="https://wa.me/584120000000" className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-xl font-bold transition transform hover:scale-105 shadow-lg">
-                Pedir Taxi
+                Llamar Ahora
               </a>
             </div>
           </div>
@@ -59,7 +59,7 @@ function App() {
       </header>
 
       {/* Hero */}
-      <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden">
+      <section id="inicio" className="relative min-h-[80vh] lg:min-h-[90vh] flex items-center overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0">
           <img 
@@ -77,7 +77,7 @@ function App() {
                 ⚡ Disponibles 24/7 en Punto Fijo
               </div>
 
-              <h2 className="text-6xl lg:text-7xl xl:text-8xl font-black text-white mb-6 leading-none">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 leading-none">
                 TU VIAJE<br/>
                 <span className="text-yellow-400">COMIENZA AQUÍ</span>
               </h2>
@@ -151,6 +151,30 @@ function App() {
         </div>
       </section>
 
+
+      {/* Social Proof - Stats */}
+      <section className="bg-yellow-400 py-12 px-6 lg:px-12">
+        <div className="max-w-[1800px] mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="text-4xl lg:text-5xl font-black text-black mb-2">+10K</div>
+              <div className="text-sm lg:text-base font-bold text-black/80">Viajes realizados</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl lg:text-5xl font-black text-black mb-2">4.9★</div>
+              <div className="text-sm lg:text-base font-bold text-black/80">Calificación</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl lg:text-5xl font-black text-black mb-2">24/7</div>
+              <div className="text-sm lg:text-base font-bold text-black/80">Disponibilidad</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl lg:text-5xl font-black text-black mb-2">+500</div>
+              <div className="text-sm lg:text-base font-bold text-black/80">Clientes felices</div>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Servicios */}
       <section id="servicios" className="py-24 px-6 lg:px-12 bg-white">
         <div className="max-w-[1800px] mx-auto">
