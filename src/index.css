@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-taxi-dark: #1a1a2e;
+  --color-taxi-primary: #f1c40f;
+  --color-taxi-secondary: #f39c12;
+  --color-taxi-accent: #2c3e50;
+  --color-taxi-light: #f5f6fa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: system-ui, -apple-system, sans-serif; background: var(--color-taxi-light); color: var(--color-taxi-dark); }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
