@@ -5,18 +5,18 @@ function App() {
 
   // Imágenes reales de Unsplash - Taxi y Transporte (SOLO carros/camionetas)
   const images = {
-    hero: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800https://source.unsplash.com/random/600x400/?taxi,carq=80',
+    hero: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800',
     servicios: {
-      standard: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800https://source.unsplash.com/random/600x400/?taxi,carq=80', // Taxi amarillo
-      ejecutivo: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800https://source.unsplash.com/random/600x400/?taxi,carq=80', // Sedán negro
-      van: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800https://source.unsplash.com/random/600x400/?taxi,carq=80', // Van
-      aeropuerto: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800https://source.unsplash.com/random/600x400/?taxi,carq=80', // Taxi (NO avión)
+      standard: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Taxi amarillo
+      ejecutivo: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Sedán negro
+      van: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Van
+      aeropuerto: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Taxi (NO avión)
     },
     flota: [
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800https://source.unsplash.com/random/600x400/?taxi,carq=80', // Taxi amarillo
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800https://source.unsplash.com/random/600x400/?taxi,carq=80', // Sedán
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800https://source.unsplash.com/random/600x400/?taxi,carq=80', // Van
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800https://source.unsplash.com/random/600x400/?taxi,carq=80', // Taxi ciudad
+      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Taxi amarillo
+      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Sedán
+      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Van
+      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Taxi ciudad
     ],
   }
 
