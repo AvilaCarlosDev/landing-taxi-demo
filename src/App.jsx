@@ -1,213 +1,272 @@
 import { useState } from 'react'
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [pickup, setPickup] = useState('')
+  const [destination, setDestination] = useState('')
 
-  const images = {
-    hero: 'https://images.unsplash.com/photo-1581244277943-fe4a9c777185?w=1200&q=80',
-    categorias: [
-      { name: 'Construcción', icon: '🏗️', color: 'from-yellow-500 to-orange-500' },
-      { name: 'Electricidad', icon: '⚡', color: 'from-blue-500 to-cyan-500' },
-      { name: 'Plomería', icon: '🔧', color: 'from-green-500 to-emerald-500' },
-      { name: 'Pintura', icon: '🎨', color: 'from-purple-500 to-pink-500' },
-      { name: 'Herramientas', icon: '🔨', color: 'from-red-500 to-orange-500' },
-      { name: 'Agrícola', icon: '🌾', color: 'from-yellow-600 to-green-600' },
-      { name: 'Automotriz', icon: '🚗', color: 'from-gray-600 to-gray-800' },
-      { name: 'Seguridad', icon: '🦺', color: 'from-orange-500 to-yellow-500' },
-    ],
-    productos: [
-      { name: 'Cemento Gris 42.5 kg', price: 'Consultar', img: 'https://images.unsplash.com/photo-1518709766653-a7b3dc68a297?w=400&q=80' },
-      { name: 'Tubería PVC 1/2"', price: 'Consultar', img: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80' },
-      { name: 'Pintura Profesional Galón', price: 'Consultar', img: 'https://images.unsplash.com/photo-1589939705384-5f4f84a22ea9?w=400&q=80' },
-      { name: 'Taladro Percutor 650W', price: 'Consultar', img: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80' },
-      { name: 'Cable THW #12', price: 'Consultar', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80' },
-      { name: 'Disco de corte 4 1/2"', price: 'Consultar', img: 'https://images.unsplash.com/photo-1530124564045-248d32178a2d?w=400&q=80' },
-    ],
-  }
+  const servicios = [
+    { name: 'Moto Rápida', icon: '🏍️', desc: 'Ideal para tráfico', price: 'Desde $3' },
+    { name: 'Auto Estándar', icon: '🚗', desc: 'Comodidad diaria', price: 'Desde $5' },
+    { name: 'Camioneta Confort', icon: '🚙', desc: 'Más espacio', price: 'Desde $7' },
+    { name: 'Van Familiar', icon: '🚐', desc: 'Hasta 7 pasajeros', price: 'Desde $10' },
+  ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top Bar */}
-      <div className="bg-gray-900 text-white py-2 px-6 lg:px-12 text-sm">
-        <div className="max-w-[1600px] mx-auto flex justify-between items-center">
-          <span>🏗️ Construimos contigo</span>
-          <span>💬 Cotizaciones por WhatsApp</span>
-          <span>🚚 Envíos locales</span>
-        </div>
-      </div>
-
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-black text-white font-sans">
       {/* Header */}
-      <header className="sticky top-0 left-0 right-0 z-50 bg-white shadow-lg border-b-4 border-yellow-500">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-5">
-          <div className="flex justify-between items-center gap-8">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md">
+        <div className="max-w-[1920px] mx-auto px-6 lg:px-12">
+          <div className="flex justify-between items-center py-5">
             <div className="flex items-center gap-3">
-              <div className="text-4xl">🏪</div>
+              <span className="text-4xl">🚗</span>
               <div>
-                <div className="text-2xl font-black text-gray-900">ProObra</div>
-                <div className="text-xs text-gray-500">Ferretería</div>
+                <span className="text-2xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">MoveNow</span>
+                <p className="text-xs text-gray-400">Muévete libre</p>
               </div>
             </div>
-            <div className="hidden lg:flex flex-1 max-w-xl">
-              <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Buscar cemento, pintura, herramientas..." className="w-full bg-gray-100 border-2 border-gray-200 rounded-l-xl px-6 py-3 outline-none focus:border-yellow-500 transition" />
-              <button className="bg-yellow-500 hover:bg-yellow-600 text-black px-6 rounded-r-xl font-bold transition">🔍</button>
-            </div>
-            <nav className="hidden lg:flex items-center gap-6">
-              <a href="#catalogo" className="text-sm font-bold hover:text-yellow-600 transition">Catálogo</a>
-              <a href="#categorias" className="text-sm font-bold hover:text-yellow-600 transition">Categorías</a>
-              <a href="#aliados" className="text-sm font-bold hover:text-yellow-600 transition">Aliados</a>
-              <a href="#contacto" className="text-sm font-bold hover:text-yellow-600 transition">Contacto</a>
+
+            <nav className="hidden lg:flex items-center gap-10">
+              <a href="#pasajeros" className="text-sm font-medium hover:text-purple-400 transition">Pasajeros</a>
+              <a href="#conductores" className="text-sm font-medium hover:text-purple-400 transition">Conductores</a>
+              <a href="#seguridad" className="text-sm font-medium hover:text-purple-400 transition">Seguridad</a>
+              <a href="#tarifas" className="text-sm font-medium hover:text-purple-400 transition">Tarifas</a>
             </nav>
+
             <div className="flex items-center gap-4">
-              <a href="#" className="hidden lg:block text-sm font-bold hover:text-yellow-600 transition">Iniciar sesión</a>
-              <a href="https://wa.me/584120000000" className="bg-green-500 hover:bg-green-600 text-white px-6 py-2.5 rounded-full font-bold transition transform hover:scale-105 flex items-center gap-2">
-                💬 Cotizar
+              <a href="#" className="hidden lg:block text-sm font-medium hover:text-purple-400 transition">Iniciar sesión</a>
+              <a href="#" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-2.5 rounded-full font-semibold transition">
+                Descargar app
               </a>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative min-h-[70vh] lg:min-h-[80vh] flex items-center bg-gradient-to-br from-yellow-500 via-orange-500 to-yellow-600">
-        <div className="absolute inset-0">
-          <img src={images.hero} alt="Ferretería" className="w-full h-full object-cover opacity-20" />
-        </div>
-        <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-12 py-24 w-full">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl lg:text-7xl font-black text-white mb-6 leading-tight">
-              Todo para tu proyecto<br/>
-              <span className="text-black">en un solo lugar</span>
-            </h1>
-            <p className="text-xl text-white/90 mb-10">
-              Materiales, herramientas y soluciones para construir, reparar y mejorar. Atención a contratistas y proyectos grandes.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a href="#catalogo" className="bg-black text-white px-8 py-4 rounded-xl font-bold text-lg transition transform hover:scale-105 shadow-xl">
-                Ver catálogo
-              </a>
-              <a href="https://wa.me/584120000000" className="bg-white text-yellow-600 px-8 py-4 rounded-xl font-bold text-lg transition border-2 border-black hover:bg-gray-100">
-                Solicitar cotización
-              </a>
-            </div>
+      <main>
+        {/* Hero con mockup */}
+        <section className="relative min-h-screen flex items-center pt-20">
+          <div className="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1600&q=80" alt="" className="w-full h-full object-cover opacity-30" />
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-900/90 via-purple-800/70 to-black/90"></div>
           </div>
-        </div>
-      </section>
 
-      {/* Categorías */}
-      <section id="categorias" className="py-20 px-6 lg:px-12 bg-white">
-        <div className="max-w-[1600px] mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-black mb-4">Categorías</h2>
-            <p className="text-gray-600 text-lg">Encuentra lo que necesitas</p>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {images.categorias.map((cat, i) => (
-              <div key={i} className="group cursor-pointer">
-                <div className={`aspect-square rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center text-6xl mb-4 transition transform group-hover:scale-105 group-hover:shadow-xl`}>
-                  {cat.icon}
-                </div>
-                <h3 className="text-center font-bold text-lg">{cat.name}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <div className="relative z-10 max-w-[1920px] mx-auto px-6 lg:px-12 py-24 w-full">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <h1 className="text-5xl lg:text-7xl font-black mb-8 leading-tight">
+                  Muévete seguro,<br/>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">rápido y a tu manera</span>
+                </h1>
+                <p className="text-xl text-gray-300 mb-12">
+                  Solicita viajes en minutos con conductores verificados, monitoreo GPS y soporte 24/7 en Punto Fijo.
+                </p>
 
-      {/* Productos */}
-      <section id="catalogo" className="py-20 px-6 lg:px-12 bg-gray-50">
-        <div className="max-w-[1600px] mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-black mb-4">Productos destacados</h2>
-            <p className="text-gray-600 text-lg">Calidad y confianza</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {images.productos.map((prod, i) => (
-              <div key={i} className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
-                <div className="aspect-square overflow-hidden">
-                  <img src={prod.img} alt={prod.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+                {/* Widget de viaje */}
+                <div className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 mb-10">
+                  <h3 className="text-2xl font-bold mb-6">Solicitar viaje</h3>
+                  <div className="space-y-5">
+                    <input type="text" value={pickup} onChange={(e) => setPickup(e.target.value)} placeholder="📍 Recogida" className="w-full bg-white/20 border border-white/30 rounded-xl px-5 py-4 outline-none focus:border-purple-400 transition text-lg" />
+                    <input type="text" value={destination} onChange={(e) => setDestination(e.target.value)} placeholder="🎯 Destino" className="w-full bg-white/20 border border-white/30 rounded-xl px-5 py-4 outline-none focus:border-purple-400 transition text-lg" />
+                    <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-5 rounded-xl font-bold text-xl transition">
+                      Ver precios
+                    </button>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="font-bold text-lg mb-3">{prod.name}</h3>
-                  <div className="flex justify-between items-center">
-                    <span className="text-2xl font-black text-yellow-600">{prod.price}</span>
-                    <a href="https://wa.me/584120000000" className="bg-yellow-500 hover:bg-yellow-600 text-black px-5 py-2.5 rounded-xl font-bold transition transform hover:scale-105">
-                      Consultar
-                    </a>
+
+                {/* Beneficios */}
+                <div className="flex flex-wrap gap-4">
+                  <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-full">
+                    <span className="text-green-400 text-xl">✓</span>
+                    <span className="text-sm font-medium">Conductores verificados</span>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-full">
+                    <span className="text-green-400 text-xl">✓</span>
+                    <span className="text-sm font-medium">Monitoreo GPS</span>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-full">
+                    <span className="text-green-400 text-xl">✓</span>
+                    <span className="text-sm font-medium">Soporte 24/7</span>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Beneficios */}
-      <section className="py-16 px-6 lg:px-12 bg-gray-900 text-white">
-        <div className="max-w-[1600px] mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: '👷', title: 'Atención a contratistas', desc: 'Precios especiales' },
-              { icon: '💬', title: 'Cotizaciones rápidas', desc: 'Respuesta inmediata' },
-              { icon: '📦', title: 'Amplio inventario', desc: 'Todo en un lugar' },
-              { icon: '🚚', title: 'Despacho local', desc: 'Envíos a obra' },
-            ].map((item, i) => (
-              <div key={i} className="text-center">
-                <div className="text-5xl mb-4">{item.icon}</div>
-                <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-                <p className="text-gray-400 text-sm">{item.desc}</p>
+              {/* Mockup celular */}
+              <div className="hidden lg:flex justify-center">
+                <div className="relative w-96 h-[650px] bg-gray-900 rounded-[3.5rem] border-[8px] border-gray-700 shadow-2xl">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-8 bg-gray-700 rounded-b-2xl"></div>
+                  <div className="w-full h-full bg-gradient-to-br from-purple-600 to-pink-600 rounded-[3rem] overflow-hidden flex items-center justify-center">
+                    <div className="text-center p-8">
+                      <div className="text-7xl mb-6">🗺️</div>
+                      <div className="font-bold text-2xl mb-2">Mapa en vivo</div>
+                      <div className="text-white/70 text-lg">Conductor cercano</div>
+                      <div className="mt-8 bg-white/20 backdrop-blur-md px-6 py-3 rounded-full inline-block">
+                        <span className="text-green-400 font-bold">●</span> En camino
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Final */}
-      <section className="py-20 px-6 lg:px-12 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent mb-6">
-            ¿Tienes un proyecto?
-          </h2>
-          <p className="text-xl text-gray-600 mb-10">Cotiza por WhatsApp y recibe atención personalizada</p>
-          <a href="https://wa.me/584120000000" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-full font-bold text-xl transition transform hover:scale-105 shadow-xl">
-            💬 Cotizar por WhatsApp
-          </a>
-        </div>
-      </section>
+        {/* Servicios */}
+        <section className="py-24 bg-black">
+          <div className="max-w-[1920px] mx-auto px-6 lg:px-12">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-black mb-4">Elige tu viaje</h2>
+              <p className="text-lg text-gray-400">Diferentes opciones para cada necesidad</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {servicios.map((servicio, i) => (
+                <div key={i} className="group bg-gradient-to-br from-purple-900/50 to-pink-900/50 p-10 rounded-3xl border border-purple-500/30 hover:border-purple-400 transition">
+                  <div className="text-6xl mb-6">{servicio.icon}</div>
+                  <h3 className="text-2xl font-bold mb-3">{servicio.name}</h3>
+                  <p className="text-gray-400 mb-6">{servicio.desc}</p>
+                  <div className="text-3xl font-black text-purple-400">{servicio.price}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Cómo funciona */}
+        <section className="py-24 bg-gradient-to-br from-purple-900 to-black">
+          <div className="max-w-[1920px] mx-auto px-6 lg:px-12">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-black mb-4">Viaja en 4 pasos</h2>
+            </div>
+
+            <div className="grid md:grid-cols-4 gap-12">
+              {[
+                { step: '1', icon: '📱', title: 'Abre la app', desc: 'Disponible iOS y Android' },
+                { step: '2', icon: '📍', title: 'Indica tu destino', desc: 'Elige recogida y llegada' },
+                { step: '3', icon: '🚗', title: 'Elige tu viaje', desc: 'Selecciona el tipo de auto' },
+                { step: '4', icon: '✅', title: 'Viaja seguro', desc: 'Monitoreo GPS en tiempo real' },
+              ].map((item, i) => (
+                <div key={i} className="text-center">
+                  <div className="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-3xl font-black mx-auto mb-8">{item.step}</div>
+                  <div className="text-6xl mb-6">{item.icon}</div>
+                  <h3 className="font-bold text-xl mb-3">{item.title}</h3>
+                  <p className="text-gray-400">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Beneficios */}
+        <section id="seguridad" className="py-24 bg-black">
+          <div className="max-w-[1920px] mx-auto px-6 lg:px-12">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <h2 className="text-4xl lg:text-5xl font-black mb-8">Viaja con confianza</h2>
+                <ul className="space-y-6">
+                  {[
+                    { icon: '✓', title: 'Conductores verificados', desc: 'Todos pasan por verificación de antecedentes y documentación' },
+                    { icon: '✓', title: 'Monitoreo GPS', desc: 'Sigue tu viaje en tiempo real desde la app' },
+                    { icon: '✓', title: 'Soporte 24/7', desc: 'Estamos disponibles para ayudarte en cualquier momento' },
+                    { icon: '✓', title: 'Tarifas claras', desc: 'Sin sorpresas. Ves el precio antes de confirmar' },
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-4">
+                      <span className="text-green-400 text-2xl font-bold">{item.icon}</span>
+                      <div>
+                        <h4 className="font-bold text-xl mb-2">{item.title}</h4>
+                        <p className="text-gray-400">{item.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-gradient-to-br from-purple-900/50 to-pink-900/50 p-10 rounded-3xl border border-purple-500/30">
+                <div className="text-center">
+                  <div className="text-8xl mb-8">🛡️</div>
+                  <h3 className="text-3xl font-bold mb-4">Tu seguridad es primero</h3>
+                  <p className="text-gray-400 text-lg mb-8">
+                    Comparte tu viaje con contactos de confianza y llega seguro a tu destino.
+                  </p>
+                  <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-10 py-5 rounded-full font-bold text-lg transition">
+                    Saber más
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA App Download */}
+        <section className="py-24 bg-black">
+          <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center">
+            <h2 className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-8">
+              Solicita tu primer viaje
+            </h2>
+            <p className="text-2xl text-gray-400 mb-12">Descarga la app y recibe $5 OFF en tu primer viaje</p>
+            <div className="flex flex-wrap justify-center gap-6">
+              <button className="bg-white text-black px-10 py-6 rounded-2xl font-bold transition flex items-center gap-4">
+                <span className="text-5xl">🍎</span>
+                <div className="text-left">
+                  <div className="text-xs text-gray-500">Disponible en</div>
+                  <div className="text-2xl">App Store</div>
+                </div>
+              </button>
+              <button className="bg-white text-black px-10 py-6 rounded-2xl font-bold transition flex items-center gap-4">
+                <span className="text-5xl">🤖</span>
+                <div className="text-left">
+                  <div className="text-xs text-gray-500">Disponible en</div>
+                  <div className="text-2xl">Google Play</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
 
       {/* Footer */}
-      <footer id="contacto" className="bg-gray-900 text-white py-16 px-6 lg:px-12 border-t-4 border-yellow-500">
-        <div className="max-w-[1600px] mx-auto">
+      <footer className="bg-gray-950 py-16 border-t border-gray-800">
+        <div className="max-w-[1920px] mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                <div className="text-4xl">🏪</div>
+                <span className="text-4xl">🚗</span>
                 <div>
-                  <div className="text-2xl font-black">ProObra</div>
-                  <div className="text-xs text-gray-400">Ferretería</div>
+                  <span className="text-2xl font-black">MoveNow</span>
+                  <p className="text-xs text-gray-400">Muévete libre</p>
                 </div>
               </div>
-              <p className="text-gray-400 mb-6 max-w-md">Ferretería y proveedor de materiales para construcción, hogar, agricultura y proyectos profesionales en Punto Fijo.</p>
+              <p className="text-gray-400 mb-8 max-w-md">
+                App de movilidad para solicitar viajes seguros, rápidos y monitoreados en Punto Fijo.
+              </p>
+              <div className="flex gap-5">
+                <a href="#" className="text-3xl hover:scale-125 transition">📷</a>
+                <a href="#" className="text-3xl hover:scale-125 transition">📘</a>
+                <a href="#" className="text-3xl hover:scale-125 transition">🐦</a>
+              </div>
             </div>
+
             <div>
-              <h4 className="font-black text-lg mb-6">Categorías</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li><a href="#" className="hover:text-yellow-500 transition">Construcción</a></li>
-                <li><a href="#" className="hover:text-yellow-500 transition">Electricidad</a></li>
-                <li><a href="#" className="hover:text-yellow-500 transition">Plomería</a></li>
-                <li><a href="#" className="hover:text-yellow-500 transition">Herramientas</a></li>
+              <h3 className="font-black text-lg mb-8">Compañía</h3>
+              <ul className="space-y-4 text-gray-400">
+                <li><a href="#" className="hover:text-white transition">Sobre nosotros</a></li>
+                <li><a href="#" className="hover:text-white transition">Seguridad</a></li>
+                <li><a href="#" className="hover:text-white transition">Comunidad</a></li>
+                <li><a href="#" className="hover:text-white transition">Blog</a></li>
               </ul>
             </div>
+
             <div>
-              <h4 className="font-black text-lg mb-6">Contacto</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li>💬 WhatsApp: +58 412-000-0000</li>
-                <li>📍 Punto Fijo, Falcón</li>
-                <li>🕒 Lun-Sáb: 7AM - 6PM</li>
-                <li>✉️ ventas@proobra.com</li>
+              <h3 className="font-black text-lg mb-8">Legal</h3>
+              <ul className="space-y-4 text-gray-400">
+                <li><a href="#" className="hover:text-white transition">Términos</a></li>
+                <li><a href="#" className="hover:text-white transition">Privacidad</a></li>
+                <li><a href="#" className="hover:text-white transition">Cookies</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">© 2026 ProObra Ferretería. Hecho con 💚 por Carlos Ávila - Developer 🇻🇪</div>
+
+          <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+            <p>© 2026 MoveNow. Hecho con 💚 por Carlos Ávila - Developer 🇻🇪</p>
+          </div>
         </div>
       </footer>
     </div>
