@@ -1,258 +1,221 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import './App.css'
 
 function App() {
   const [pickup, setPickup] = useState('')
   const [destination, setDestination] = useState('')
+  const [scrolled, setScrolled] = useState(false)
+  const [activeTab, setActiveTab] = useState('Auto')
+
+  useEffect(() => {
+    const h = () => setScrolled(window.scrollY > 60)
+    window.addEventListener('scroll', h)
+    return () => window.removeEventListener('scroll', h)
+  }, [])
+
+  const opciones = [
+    { name: 'Moto', icon: '🏍️', desc: 'Rápido y económico', price: 'Desde $2', features: ['Ideal para tráfico', 'Casco incluido', 'Llega más rápido'] },
+    { name: 'Auto', icon: '🚗', desc: 'Comodidad diaria', price: 'Desde $4', features: ['Aire acondicionado', 'Asientos amplios', 'Seguro incluido'] },
+    { name: 'Confort', icon: '🚙', desc: 'Máximo lujo', price: 'Desde $7', features: ['Autos premium', 'Conductor top', 'Música a tu gusto'] },
+  ]
+
+  const stats = [
+    { value: '5,000+', label: 'Viajes por día' },
+    { value: '< 5min', label: 'Tiempo de espera' },
+    { value: '1,200+', label: 'Conductores' },
+    { value: '4.9★', label: 'Valoración' },
+  ]
+
+  const pasos = [
+    { num: '01', icon: '📍', title: 'Indica tu destino', desc: 'Escribe tu punto de recogida y a dónde quieres ir.' },
+    { num: '02', icon: '🚗', title: 'Elige tu viaje', desc: 'Selecciona entre Moto, Auto o Confort según tu presupuesto.' },
+    { num: '03', icon: '💳', title: 'Confirma y paga', desc: 'Paga en efectivo, tarjeta o billetera digital.' },
+    { num: '04', icon: '⚡', title: '¡Llega rápido!', desc: 'Rastrea tu conductor en tiempo real hasta tu destino.' },
+  ]
+
+  const activeOption = opciones.find(o => o.name === activeTab) || opciones[1]
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md">
-        <div className="max-w-[1920px] mx-auto px-6 lg:px-12">
-          <div className="flex justify-between items-center py-5">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-2xl">🚗</div>
-              <span className="text-2xl font-black">MoveNow</span>
-            </div>
+    <div className="taxi-app">
 
-            <nav className="hidden lg:flex items-center gap-10">
-              <a href="#conduce" className="text-sm font-medium hover:text-gray-300 transition">Conduce</a>
-              <a href="#viaja" className="text-sm font-medium hover:text-gray-300 transition">Viaja</a>
-              <a href="#seguridad" className="text-sm font-medium hover:text-gray-300 transition">Seguridad</a>
-              <a href="#" className="text-sm font-medium hover:text-gray-300 transition">Empresas</a>
-            </nav>
-
-            <div className="flex items-center gap-4">
-              <a href="#" className="hidden lg:block text-sm font-medium hover:text-gray-300 transition">Iniciar sesión</a>
-              <a href="#" className="bg-white text-black px-6 py-2.5 rounded-full font-bold transition hover:bg-gray-200">
-                Regístrate
-              </a>
-            </div>
+      <header className={`taxi-header ${scrolled ? 'scrolled' : ''}`}>
+        <div className="header-inner">
+          <a href="#" className="taxi-logo">
+            <div className="logo-icon">🚗</div>
+            <span className="logo-name">MoveNow</span>
+          </a>
+          <nav className="taxi-nav">
+            <a href="#viaja">Viaja</a>
+            <a href="#conduce">Conduce</a>
+            <a href="#empresas">Empresas</a>
+            <a href="#seguridad">Seguridad</a>
+          </nav>
+          <div className="header-ctas">
+            <a href="#" className="btn-login">Iniciar sesión</a>
+            <a href="#" className="btn-register">Regístrate gratis</a>
           </div>
         </div>
       </header>
 
       <main>
-        {/* Hero - Estilo Uber */}
-        <section className="relative min-h-screen flex items-center pt-20">
-          <div className="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1449965408869-e421fed321f9?w=1600&q=80" alt="" className="w-full h-full object-cover opacity-40" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent"></div>
+        <section className="taxi-hero">
+          <div className="hero-bg">
+            <img src="https://images.unsplash.com/photo-1449965408869-e421fed321f9?w=1600&q=80" alt="" />
+            <div className="hero-overlay" />
           </div>
-
-          <div className="relative z-10 max-w-[1920px] mx-auto px-6 lg:px-12 py-24 w-full">
-            <div className="max-w-2xl">
-              <h1 className="text-5xl lg:text-7xl font-black text-white mb-8 leading-tight">
-                Ve a cualquier lado<br/>con MoveNow
-              </h1>
-              <p className="text-xl text-gray-300 mb-10">
-                Solicita un viaje, sube y llega. Simple así.
-              </p>
-
-              {/* Widget de viaje - estilo Uber */}
-              <div className="bg-white text-black p-6 rounded-2xl shadow-2xl">
-                <h3 className="text-2xl font-bold mb-6">Solicita un viaje</h3>
-                <div className="space-y-4">
-                  <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">●</span>
-                    <input 
-                      type="text" 
-                      value={pickup}
-                      onChange={(e) => setPickup(e.target.value)}
-                      placeholder="Dirección de recogida" 
-                      className="w-full bg-gray-100 rounded-xl px-5 py-4 pl-12 outline-none focus:bg-gray-200 transition text-lg"
-                    />
-                  </div>
-                  <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">■</span>
-                    <input 
-                      type="text" 
-                      value={destination}
-                      onChange={(e) => setDestination(e.target.value)}
-                      placeholder="¿A dónde vas?" 
-                      className="w-full bg-gray-100 rounded-xl px-5 py-4 pl-12 outline-none focus:bg-gray-200 transition text-lg"
-                    />
-                  </div>
-                  <button className="w-full bg-black text-white py-4 rounded-xl font-bold text-xl transition hover:bg-gray-800">
-                    Ver precios
-                  </button>
-                </div>
-              </div>
-
-              {/* Beneficios */}
-              <div className="mt-10 grid grid-cols-3 gap-6">
-                {[
-                  { icon: '⏱️', text: 'Rápido' },
-                  { icon: '🛡️', text: 'Seguro' },
-                  { icon: '💰', text: 'Accesible' },
-                ].map((item, i) => (
-                  <div key={i} className="text-center">
-                    <div className="text-3xl mb-2">{item.icon}</div>
-                    <div className="font-semibold">{item.text}</div>
+          <div className="hero-body">
+            <div className="hero-text">
+              <div className="hero-chip">⚡ Disponible 24/7 en tu ciudad</div>
+              <h1>Ve a cualquier<br /><span>lugar</span> en minutos</h1>
+              <p>Solicita tu viaje en segundos. Conductores verificados, precios transparentes, llegada garantizada.</p>
+              <div className="hero-stats">
+                {stats.map((s, i) => (
+                  <div key={i} className="stat-block">
+                    <strong>{s.value}</strong>
+                    <span>{s.label}</span>
                   </div>
                 ))}
               </div>
             </div>
+            <div className="hero-widget">
+              <div className="widget-header">
+                <h3>Solicitar viaje</h3>
+                <span className="widget-badge">🕐 Conductor en 4 min</span>
+              </div>
+              <div className="widget-form">
+                <div className="input-group">
+                  <div className="input-dot blue" />
+                  <input type="text" value={pickup} onChange={e => setPickup(e.target.value)} placeholder="¿Desde dónde sales?" />
+                </div>
+                <div className="input-divider" />
+                <div className="input-group">
+                  <div className="input-dot dark" />
+                  <input type="text" value={destination} onChange={e => setDestination(e.target.value)} placeholder="¿A dónde vas?" />
+                </div>
+              </div>
+              <div className="widget-types">
+                {opciones.map((o, i) => (
+                  <button key={i} className={`type-btn ${activeTab === o.name ? 'active' : ''}`} onClick={() => setActiveTab(o.name)}>
+                    <span>{o.icon}</span>
+                    <span>{o.name}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="widget-price">
+                <span>Estimado</span>
+                <strong>{activeOption.price}</strong>
+              </div>
+              <button className="btn-solicitar">Ver precios detallados →</button>
+            </div>
           </div>
         </section>
 
-        {/* Opciones de viaje */}
-        <section className="py-24 bg-white text-black">
-          <div className="max-w-[1920px] mx-auto px-6 lg:px-12">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-black mb-6">Elige tu viaje</h2>
-              <p className="text-lg text-gray-600">Diferentes opciones para cada necesidad y presupuesto</p>
+        <section id="viaja" className="opciones-section">
+          <div className="section-wrap">
+            <div className="section-head">
+              <span className="eyebrow">Opciones de viaje</span>
+              <h2>Elige cómo moverte</h2>
+              <p>Cada opción está diseñada para un momento diferente</p>
             </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { name: 'Moto', icon: '🏍️', desc: 'Rápido y económico', price: 'Desde $2', features: ['Casco incluido', 'Ideal para tráfico', 'Llega más rápido'] },
-                { name: 'Auto', icon: '🚗', desc: 'Comodidad diaria', price: 'Desde $4', features: ['Aire acondicionado', 'Viajes compartidos', 'Seguro incluido'] },
-                { name: 'Confort', icon: '🚙', desc: 'Máximo confort', price: 'Desde $7', features: ['Autos nuevos', 'Más espacio', 'Conductores top'] },
-              ].map((option, i) => (
-                <div key={i} className="bg-gray-50 rounded-3xl p-10 border-2 border-gray-200 hover:border-black transition">
-                  <div className="text-6xl mb-6">{option.icon}</div>
-                  <h3 className="text-3xl font-black mb-3">{option.name}</h3>
-                  <p className="text-gray-600 mb-4">{option.desc}</p>
-                  <div className="text-4xl font-black mb-6">{option.price}</div>
-                  <ul className="space-y-3">
-                    {option.features.map((feature, j) => (
-                      <li key={j} className="flex items-center gap-3">
-                        <span className="text-green-600">✓</span>
-                        <span className="text-gray-700">{feature}</span>
-                      </li>
-                    ))}
+            <div className="opciones-grid">
+              {opciones.map((o, i) => (
+                <div key={i} className={`opcion-card ${o.name === 'Auto' ? 'featured' : ''}`}>
+                  {o.name === 'Auto' && <div className="card-badge">Más popular</div>}
+                  <div className="opcion-icon">{o.icon}</div>
+                  <h3>{o.name}</h3>
+                  <p className="opcion-desc">{o.desc}</p>
+                  <div className="opcion-price">{o.price}</div>
+                  <ul className="opcion-features">
+                    {o.features.map((f, j) => <li key={j}>✓ {f}</li>)}
                   </ul>
+                  <button className="btn-elegir">Elegir {o.name}</button>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Conduce */}
-        <section id="conduce" className="py-24 bg-gray-100">
-          <div className="max-w-[1920px] mx-auto px-6 lg:px-12">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-4xl lg:text-5xl font-black mb-8">Conduce con MoveNow</h2>
-                <p className="text-lg text-gray-600 mb-10">
-                  Gana dinero conduciendo. Tú decides cuándo y cuánto trabajar.
-                </p>
-                <ul className="space-y-5 mb-10">
-                  {[
-                    'Tú eliges tu horario',
-                    'Gana por viaje + propinas',
-                    'Pagos semanales',
-                    'Seguro incluido en cada viaje',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-4">
-                      <span className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">✓</span>
-                      <span className="text-lg">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button className="bg-black text-white px-10 py-5 rounded-full font-bold text-lg transition hover:bg-gray-800">
-                  Comienza a conducir
-                </button>
-              </div>
-              <div className="bg-white rounded-3xl p-10 shadow-xl">
-                <div className="text-center">
-                  <div className="text-8xl mb-8">💰</div>
-                  <h3 className="text-3xl font-black mb-4">Gana hasta $1,500/mes</h3>
-                  <p className="text-gray-600 mb-8">Conduciendo 20 horas semanales en promedio</p>
-                  <div className="bg-green-100 text-green-800 px-6 py-3 rounded-full inline-block font-semibold">
-                    $15-25 por hora promedio
-                  </div>
-                </div>
-              </div>
+        <section className="pasos-section">
+          <div className="section-wrap">
+            <div className="section-head">
+              <span className="eyebrow">Simple y rápido</span>
+              <h2>¿Cómo funciona?</h2>
             </div>
-          </div>
-        </section>
-
-        {/* Seguridad */}
-        <section id="seguridad" className="py-24 bg-black">
-          <div className="max-w-[1920px] mx-auto px-6 lg:px-12">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-black mb-6">Tu seguridad es primero</h2>
-              <p className="text-lg text-gray-400">Viaja con confianza</p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-10">
-              {[
-                { icon: '✅', title: 'Conductores verificados', desc: 'Todos pasan por verificación de antecedentes' },
-                { icon: '📍', title: 'Monitoreo GPS', desc: 'Comparte tu viaje en tiempo real' },
-                { icon: '🆘', title: 'Soporte 24/7', desc: 'Estamos aquí cuando nos necesites' },
-              ].map((item, i) => (
-                <div key={i} className="bg-gray-900 p-10 rounded-3xl border border-gray-800">
-                  <div className="text-6xl mb-6">{item.icon}</div>
-                  <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
-                  <p className="text-gray-400">{item.desc}</p>
+            <div className="pasos-grid">
+              {pasos.map((p, i) => (
+                <div key={i} className="paso-card">
+                  <div className="paso-num">{p.num}</div>
+                  <div className="paso-icon">{p.icon}</div>
+                  <h3>{p.title}</h3>
+                  <p>{p.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA Final */}
-        <section className="py-24 bg-white text-black">
-          <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center">
-            <h2 className="text-5xl lg:text-6xl font-black mb-8">¿Listo para moverte?</h2>
-            <p className="text-2xl text-gray-600 mb-12">Descarga la app y recibe $5 OFF en tu primer viaje</p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <button className="bg-black text-white px-10 py-6 rounded-2xl font-bold transition flex items-center gap-4">
-                <span className="text-5xl">🍎</span>
-                <div className="text-left">
-                  <div className="text-xs text-gray-400">Disponible en</div>
-                  <div className="text-2xl">App Store</div>
-                </div>
-              </button>
-              <button className="bg-black text-white px-10 py-6 rounded-2xl font-bold transition flex items-center gap-4">
-                <span className="text-5xl">🤖</span>
-                <div className="text-left">
-                  <div className="text-xs text-gray-400">Disponible en</div>
-                  <div className="text-2xl">Google Play</div>
-                </div>
-              </button>
+        <section id="conduce" className="driver-section">
+          <div className="section-wrap driver-inner">
+            <div className="driver-img">
+              <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80" alt="conductor" />
+            </div>
+            <div className="driver-text">
+              <span className="eyebrow">Para conductores</span>
+              <h2>Conduce con MoveNow y gana más</h2>
+              <p>Maneja en tus propios horarios, recibe pagos semanales y accede a beneficios exclusivos para conductores.</p>
+              <ul className="driver-perks">
+                <li>✓ Horario completamente flexible</li>
+                <li>✓ Pagos semanales garantizados</li>
+                <li>✓ Seguro de conducción incluido</li>
+                <li>✓ Bonos por calificación alta</li>
+              </ul>
+              <a href="#" className="btn-driver">Conviertete en conductor →</a>
             </div>
           </div>
         </section>
+
+        <section className="app-section">
+          <div className="section-wrap app-inner">
+            <div>
+              <h2>Descarga la app</h2>
+              <p>Disponible para iOS y Android. Miles de usuarios ya usan MoveNow cada día.</p>
+              <div className="app-btns">
+                <a href="#" className="btn-store">🍎 App Store</a>
+                <a href="#" className="btn-store">🤖 Google Play</a>
+              </div>
+            </div>
+            <div className="app-visual">📱</div>
+          </div>
+        </section>
+
+        <footer className="taxi-footer">
+          <div className="section-wrap footer-inner">
+            <div>
+              <span className="logo-name" style={{color:'white', fontSize:'22px'}}>🚗 MoveNow</span>
+              <p>La forma más inteligente de moverte</p>
+            </div>
+            <div className="footer-links">
+              <h4>Viaja</h4>
+              <a href="#">Cómo funciona</a>
+              <a href="#">Tarifas</a>
+              <a href="#">Seguridad</a>
+            </div>
+            <div className="footer-links">
+              <h4>Conduce</h4>
+              <a href="#">Regístrate</a>
+              <a href="#">Ganancias</a>
+              <a href="#">Requisitos</a>
+            </div>
+            <div className="footer-links">
+              <h4>Empresa</h4>
+              <a href="#">Sobre nosotros</a>
+              <a href="#">Blog</a>
+              <a href="#">Contacto</a>
+            </div>
+          </div>
+          <div className="footer-bottom">© 2026 MoveNow · Todos los derechos reservados</div>
+        </footer>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-black text-white py-16 border-t border-gray-800">
-        <div className="max-w-[1920px] mx-auto px-6 lg:px-12">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-2xl">🚗</div>
-                <span className="text-2xl font-black">MoveNow</span>
-              </div>
-              <p className="text-gray-400 mb-8 max-w-md">
-                Tu app de movilidad en Punto Fijo. Viajes seguros, rápidos y accesibles.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-bold text-lg mb-8">Compañía</h3>
-              <ul className="space-y-4 text-gray-400">
-                <li><a href="#" className="hover:text-white transition">Sobre nosotros</a></li>
-                <li><a href="#" className="hover:text-white transition">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition">Carreras</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold text-lg mb-8">Legal</h3>
-              <ul className="space-y-4 text-gray-400">
-                <li><a href="#" className="hover:text-white transition">Términos</a></li>
-                <li><a href="#" className="hover:text-white transition">Privacidad</a></li>
-                <li><a href="#" className="hover:text-white transition">Seguridad</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-            <p>© 2026 MoveNow. Hecho con 💚 por Carlos Ávila - Developer 🇻🇪</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
