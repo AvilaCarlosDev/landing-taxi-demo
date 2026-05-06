@@ -5,18 +5,18 @@ function App() {
 
   // Imágenes reales de Unsplash - Taxi y Transporte (SOLO carros/camionetas)
   const images = {
-    hero: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1200&q=80',
+    hero: 'https://source.unsplash.com/random/600x400/?taxi,car',
     servicios: {
-      standard: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80', // Taxi amarillo
-      ejecutivo: 'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=600&q=80', // Sedán negro
-      van: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=600&q=80', // Van
-      aeropuerto: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80', // Taxi (NO avión)
+      standard: 'https://source.unsplash.com/random/600x400/?taxi,car', // Taxi amarillo
+      ejecutivo: 'https://source.unsplash.com/random/600x400/?taxi,car', // Sedán negro
+      van: 'https://source.unsplash.com/random/600x400/?taxi,car', // Van
+      aeropuerto: 'https://source.unsplash.com/random/600x400/?taxi,car', // Taxi (NO avión)
     },
     flota: [
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&q=80', // Taxi amarillo
-      'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=500&q=80', // Sedán
-      'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=500&q=80', // Van
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&q=80', // Taxi ciudad
+      'https://source.unsplash.com/random/600x400/?taxi,car', // Taxi amarillo
+      'https://source.unsplash.com/random/600x400/?taxi,car', // Sedán
+      'https://source.unsplash.com/random/600x400/?taxi,car', // Van
+      'https://source.unsplash.com/random/600x400/?taxi,car', // Taxi ciudad
     ],
   }
 
