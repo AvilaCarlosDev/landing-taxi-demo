@@ -3,22 +3,21 @@ import { useState } from 'react'
 function App() {
   const [selectedService, setSelectedService] = useState('standard')
 
-  // Imágenes reales de Unsplash - Taxi y Transporte
+  // Imágenes reales de Unsplash - Taxi y Transporte (SOLO carros/camionetas)
   const images = {
-    hero: 'https://images.unsplash.com/photo-1449965408869-e0f3f8b88b28?w=1200&q=80',
+    hero: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1200&q=80',
     servicios: {
-      standard: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80',
-      ejecutivo: 'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=600&q=80',
-      van: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=600&q=80',
-      aeropuerto: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80',
+      standard: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80', // Taxi amarillo
+      ejecutivo: 'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=600&q=80', // Sedán negro
+      van: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=600&q=80', // Van
+      aeropuerto: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80', // Taxi (NO avión)
     },
     flota: [
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&q=80',
-      'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=500&q=80',
-      'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=500&q=80',
-      'https://images.unsplash.com/photo-1449965408869-e0f3f8b88b28?w=500&q=80',
+      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&q=80', // Taxi amarillo
+      'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=500&q=80', // Sedán
+      'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=500&q=80', // Van
+      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&q=80', // Taxi ciudad
     ],
-    mapa: 'https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80',
   }
 
   return (
