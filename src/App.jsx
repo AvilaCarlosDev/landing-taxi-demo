@@ -1,57 +1,66 @@
 import { useState } from 'react'
 
 function App() {
-  const [selectedService, setSelectedService] = useState('standard')
+  const [searchTerm, setSearchTerm] = useState('')
 
-  // Imágenes reales de Unsplash - Taxi y Transporte (SOLO carros/camionetas)
   const images = {
-    hero: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800',
-    servicios: {
-      standard: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Taxi amarillo
-      ejecutivo: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Sedán negro
-      van: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Van
-      aeropuerto: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Taxi (NO avión)
-    },
-    flota: [
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Taxi amarillo
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Sedán
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Van
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800', // Taxi ciudad
+    hero: 'https://images.unsplash.com/photo-1581244277943-fe4a9c777185?w=1200&q=80',
+    categorias: [
+      { name: 'Construcción', icon: '🏗️', color: 'from-yellow-500 to-orange-500' },
+      { name: 'Electricidad', icon: '⚡', color: 'from-blue-500 to-cyan-500' },
+      { name: 'Plomería', icon: '🔧', color: 'from-green-500 to-emerald-500' },
+      { name: 'Pintura', icon: '🎨', color: 'from-purple-500 to-pink-500' },
+      { name: 'Herramientas', icon: '🔨', color: 'from-red-500 to-orange-500' },
+      { name: 'Agrícola', icon: '🌾', color: 'from-yellow-600 to-green-600' },
+      { name: 'Automotriz', icon: '🚗', color: 'from-gray-600 to-gray-800' },
+      { name: 'Seguridad', icon: '🦺', color: 'from-orange-500 to-yellow-500' },
+    ],
+    productos: [
+      { name: 'Cemento Gris 42.5 kg', price: 'Consultar', img: 'https://images.unsplash.com/photo-1518709766653-a7b3dc68a297?w=400&q=80' },
+      { name: 'Tubería PVC 1/2"', price: 'Consultar', img: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80' },
+      { name: 'Pintura Profesional Galón', price: 'Consultar', img: 'https://images.unsplash.com/photo-1589939705384-5f4f84a22ea9?w=400&q=80' },
+      { name: 'Taladro Percutor 650W', price: 'Consultar', img: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80' },
+      { name: 'Cable THW #12', price: 'Consultar', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80' },
+      { name: 'Disco de corte 4 1/2"', price: 'Consultar', img: 'https://images.unsplash.com/photo-1530124564045-248d32178a2d?w=400&q=80' },
     ],
   }
 
   return (
-    <div className="min-h-[80vh] lg:min-h-[90vh] bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
+      {/* Top Bar */}
+      <div className="bg-gray-900 text-white py-2 px-6 lg:px-12 text-sm">
+        <div className="max-w-[1600px] mx-auto flex justify-between items-center">
+          <span>🏗️ Construimos contigo</span>
+          <span>💬 Cotizaciones por WhatsApp</span>
+          <span>🚚 Envíos locales</span>
+        </div>
+      </div>
+
       {/* Header */}
-      <header className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-gray-900 sticky top-0 z-50 shadow-2xl">
-        <div className="max-w-[1800px] mx-auto px-6 lg:px-12 py-6">
-          <div className="flex items-center justify-between gap-8">
-            {/* Logo */}
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center text-5xl shadow-lg">
-                🚖
-              </div>
+      <header className="sticky top-0 left-0 right-0 z-50 bg-white shadow-lg border-b-4 border-yellow-500">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-5">
+          <div className="flex justify-between items-center gap-8">
+            <div className="flex items-center gap-3">
+              <div className="text-4xl">🏪</div>
               <div>
-                <h1 className="text-3xl font-black tracking-tight">TAXI<span className="text-black">EXPRESS</span></h1>
-                <p className="text-xs text-gray-800">Punto Fijo, Falcón</p>
+                <div className="text-2xl font-black text-gray-900">ProObra</div>
+                <div className="text-xs text-gray-500">Ferretería</div>
               </div>
             </div>
-
-            {/* Nav */}
-            <nav className="hidden lg:flex items-center gap-10 font-bold">
-              <a href="#inicio" className="hover:text-black/70 transition">Inicio</a>
-              <a href="#servicios" className="hover:text-black/70 transition">Servicios</a>
-              <a href="#flota" className="hover:text-black/70 transition">Flota</a>
-              <a href="#contacto" className="hover:text-black/70 transition">Contacto</a>
+            <div className="hidden lg:flex flex-1 max-w-xl">
+              <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Buscar cemento, pintura, herramientas..." className="w-full bg-gray-100 border-2 border-gray-200 rounded-l-xl px-6 py-3 outline-none focus:border-yellow-500 transition" />
+              <button className="bg-yellow-500 hover:bg-yellow-600 text-black px-6 rounded-r-xl font-bold transition">🔍</button>
+            </div>
+            <nav className="hidden lg:flex items-center gap-6">
+              <a href="#catalogo" className="text-sm font-bold hover:text-yellow-600 transition">Catálogo</a>
+              <a href="#categorias" className="text-sm font-bold hover:text-yellow-600 transition">Categorías</a>
+              <a href="#aliados" className="text-sm font-bold hover:text-yellow-600 transition">Aliados</a>
+              <a href="#contacto" className="text-sm font-bold hover:text-yellow-600 transition">Contacto</a>
             </nav>
-
-            {/* CTA */}
             <div className="flex items-center gap-4">
-              <a href="tel:+584120000000" className="hidden lg:flex items-center gap-2 bg-black text-yellow-400 px-6 py-3 rounded-xl font-bold hover:bg-gray-900 transition">
-                📞 0412-000-0000
-              </a>
-              <a href="https://wa.me/584120000000" className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-xl font-bold transition transform hover:scale-105 shadow-lg">
-                Llamar Ahora
+              <a href="#" className="hidden lg:block text-sm font-bold hover:text-yellow-600 transition">Iniciar sesión</a>
+              <a href="https://wa.me/584120000000" className="bg-green-500 hover:bg-green-600 text-white px-6 py-2.5 rounded-full font-bold transition transform hover:scale-105 flex items-center gap-2">
+                💬 Cotizar
               </a>
             </div>
           </div>
@@ -59,255 +68,146 @@ function App() {
       </header>
 
       {/* Hero */}
-      <section id="inicio" className="relative min-h-[80vh] lg:min-h-[90vh] flex items-center overflow-hidden">
-        {/* Background */}
+      <section className="relative min-h-[70vh] lg:min-h-[80vh] flex items-center bg-gradient-to-br from-yellow-500 via-orange-500 to-yellow-600">
         <div className="absolute inset-0">
-          <img 
-            src={images.hero} 
-            alt="Taxi amarillo en la ciudad"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
+          <img src={images.hero} alt="Ferretería" className="w-full h-full object-cover opacity-20" />
         </div>
-
-        <div className="relative z-10 max-w-[1800px] mx-auto px-6 lg:px-12 py-24">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-yellow-400 text-black px-6 py-3 rounded-full font-bold mb-8">
-                ⚡ Disponibles 24/7 en Punto Fijo
-              </div>
-
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 leading-none">
-                TU VIAJE<br/>
-                <span className="text-yellow-400">COMIENZA AQUÍ</span>
-              </h2>
-
-              <p className="text-xl text-white/90 mb-10 max-w-xl">
-                Servicio de taxi seguro, rápido y confiable. 
-                Llegamos donde tú estés en minutos.
-              </p>
-
-              {/* Booking Widget */}
-              <div className="bg-white rounded-3xl p-8 shadow-2xl mb-10">
-                <h3 className="text-2xl font-black mb-6 text-gray-900">📍 Solicitar Taxi</h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Recogida</label>
-                    <input 
-                      type="text" 
-                      placeholder="Dirección de recogida"
-                      className="w-full bg-gray-100 border-2 border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-yellow-400 transition"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Destino</label>
-                    <input 
-                      type="text" 
-                      placeholder="Dirección de destino"
-                      className="w-full bg-gray-100 border-2 border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-yellow-400 transition"
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-bold text-gray-700 mb-2">Pasajeros</label>
-                      <select className="w-full bg-gray-100 border-2 border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-yellow-400 transition">
-                        <option>1-4</option>
-                        <option>5-7</option>
-                        <option>8+</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-bold text-gray-700 mb-2">Servicio</label>
-                      <select className="w-full bg-gray-100 border-2 border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-yellow-400 transition">
-                        <option>Standard</option>
-                        <option>Ejecutivo</option>
-                        <option>Van</option>
-                      </select>
-                    </div>
-                  </div>
-                  <a href="https://wa.me/584120000000" className="block w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black py-5 rounded-xl font-black text-lg transition transform hover:scale-105 text-center">
-                    🚖 Pedir Ahora
-                  </a>
-                </div>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="text-4xl font-black text-yellow-400">15min</div>
-                  <div className="text-white/80 text-sm">Tiempo promedio</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-black text-yellow-400">24/7</div>
-                  <div className="text-white/80 text-sm">Disponibilidad</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-black text-yellow-400">100%</div>
-                  <div className="text-white/80 text-sm">Seguridad</div>
-                </div>
-              </div>
+        <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-12 py-24 w-full">
+          <div className="max-w-3xl">
+            <h1 className="text-5xl lg:text-7xl font-black text-white mb-6 leading-tight">
+              Todo para tu proyecto<br/>
+              <span className="text-black">en un solo lugar</span>
+            </h1>
+            <p className="text-xl text-white/90 mb-10">
+              Materiales, herramientas y soluciones para construir, reparar y mejorar. Atención a contratistas y proyectos grandes.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <a href="#catalogo" className="bg-black text-white px-8 py-4 rounded-xl font-bold text-lg transition transform hover:scale-105 shadow-xl">
+                Ver catálogo
+              </a>
+              <a href="https://wa.me/584120000000" className="bg-white text-yellow-600 px-8 py-4 rounded-xl font-bold text-lg transition border-2 border-black hover:bg-gray-100">
+                Solicitar cotización
+              </a>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Categorías */}
+      <section id="categorias" className="py-20 px-6 lg:px-12 bg-white">
+        <div className="max-w-[1600px] mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl lg:text-5xl font-black mb-4">Categorías</h2>
+            <p className="text-gray-600 text-lg">Encuentra lo que necesitas</p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {images.categorias.map((cat, i) => (
+              <div key={i} className="group cursor-pointer">
+                <div className={`aspect-square rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center text-6xl mb-4 transition transform group-hover:scale-105 group-hover:shadow-xl`}>
+                  {cat.icon}
+                </div>
+                <h3 className="text-center font-bold text-lg">{cat.name}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* Social Proof - Stats */}
-      <section className="bg-yellow-400 py-12 px-6 lg:px-12">
-        <div className="max-w-[1800px] mx-auto">
+      {/* Productos */}
+      <section id="catalogo" className="py-20 px-6 lg:px-12 bg-gray-50">
+        <div className="max-w-[1600px] mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl lg:text-5xl font-black mb-4">Productos destacados</h2>
+            <p className="text-gray-600 text-lg">Calidad y confianza</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {images.productos.map((prod, i) => (
+              <div key={i} className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
+                <div className="aspect-square overflow-hidden">
+                  <img src={prod.img} alt={prod.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+                </div>
+                <div className="p-6">
+                  <h3 className="font-bold text-lg mb-3">{prod.name}</h3>
+                  <div className="flex justify-between items-center">
+                    <span className="text-2xl font-black text-yellow-600">{prod.price}</span>
+                    <a href="https://wa.me/584120000000" className="bg-yellow-500 hover:bg-yellow-600 text-black px-5 py-2.5 rounded-xl font-bold transition transform hover:scale-105">
+                      Consultar
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Beneficios */}
+      <section className="py-16 px-6 lg:px-12 bg-gray-900 text-white">
+        <div className="max-w-[1600px] mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-black text-black mb-2">+10K</div>
-              <div className="text-sm lg:text-base font-bold text-black/80">Viajes realizados</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-black text-black mb-2">4.9★</div>
-              <div className="text-sm lg:text-base font-bold text-black/80">Calificación</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-black text-black mb-2">24/7</div>
-              <div className="text-sm lg:text-base font-bold text-black/80">Disponibilidad</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-black text-black mb-2">+500</div>
-              <div className="text-sm lg:text-base font-bold text-black/80">Clientes felices</div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* Servicios */}
-      <section id="servicios" className="py-24 px-6 lg:px-12 bg-white">
-        <div className="max-w-[1800px] mx-auto">
-          <div className="text-center mb-16">
-            <span className="inline-block bg-yellow-100 text-yellow-800 px-6 py-3 rounded-full font-bold text-sm tracking-widest uppercase mb-6">
-              🚖 Nuestros Servicios
-            </span>
-            <h2 className="text-6xl lg:text-7xl font-black text-gray-900">Elige Tu Experiencia</h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { id: 'standard', name: 'Standard', desc: 'Económico y rápido', price: 'Desde $5', img: images.servicios.standard, features: ['Hasta 4 pasajeros', 'A/C', 'Radio'] },
-              { id: 'ejecutivo', name: 'Ejecutivo', desc: 'Máximo confort', price: 'Desde $8', img: images.servicios.ejecutivo, features: ['Sedán premium', 'WiFi', 'Agua'] },
-              { id: 'van', name: 'Van / Grupo', desc: 'Para familias', price: 'Desde $12', img: images.servicios.van, features: ['Hasta 7 pasajeros', 'Espacio extra', 'A/C'] },
-              { id: 'aeropuerto', name: 'Aeropuerto', desc: 'Traslados seguros', price: 'Desde $25', img: images.servicios.aeropuerto, features: ['Puntualidad', 'Tracking', 'Maletas'] },
-            ].map((servicio) => (
-              <div 
-                key={servicio.id}
-                onClick={() => setSelectedService(servicio.id)}
-                className={`cursor-pointer rounded-3xl overflow-hidden border-4 transition-all duration-300 ${
-                  selectedService === servicio.id 
-                    ? 'border-yellow-400 shadow-2xl scale-105' 
-                    : 'border-transparent shadow-lg hover:shadow-xl'
-                }`}
-              >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img 
-                    src={servicio.img} 
-                    alt={servicio.name}
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                  />
-                </div>
-                <div className="p-6 bg-white">
-                  <h3 className="text-2xl font-black mb-2">{servicio.name}</h3>
-                  <p className="text-gray-500 mb-4">{servicio.desc}</p>
-                  <div className="text-3xl font-black text-yellow-600 mb-4">{servicio.price}</div>
-                  <ul className="space-y-2">
-                    {servicio.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm">
-                        <span className="text-green-500">✓</span>
-                        <span className="text-gray-600">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              { icon: '👷', title: 'Atención a contratistas', desc: 'Precios especiales' },
+              { icon: '💬', title: 'Cotizaciones rápidas', desc: 'Respuesta inmediata' },
+              { icon: '📦', title: 'Amplio inventario', desc: 'Todo en un lugar' },
+              { icon: '🚚', title: 'Despacho local', desc: 'Envíos a obra' },
+            ].map((item, i) => (
+              <div key={i} className="text-center">
+                <div className="text-5xl mb-4">{item.icon}</div>
+                <h3 className="font-bold text-lg mb-2">{item.title}</h3>
+                <p className="text-gray-400 text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Flota */}
-      <section id="flota" className="py-24 px-6 lg:px-12 bg-gray-100">
-        <div className="max-w-[1800px] mx-auto">
-          <div className="text-center mb-16">
-            <span className="inline-block bg-black text-white px-6 py-3 rounded-full font-bold text-sm tracking-widest uppercase mb-6">
-              🚗 Nuestra Flota
-            </span>
-            <h2 className="text-6xl lg:text-7xl font-black text-gray-900">Vehículos Modernos</h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {images.flota.map((img, index) => (
-              <div key={index} className="group cursor-pointer">
-                <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-xl">
-                  <img 
-                    src={img} 
-                    alt={`Vehículo ${index + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA WhatsApp */}
-      <section className="py-24 px-6 lg:px-12 bg-gradient-to-br from-green-500 to-green-600 text-white">
-        <div className="max-w-[1200px] mx-auto text-center">
-          <span className="text-7xl mb-8 block">💬</span>
-          <h2 className="text-5xl lg:text-6xl font-black mb-8">Pide por WhatsApp</h2>
-          <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-            Respuesta inmediata. Envía tu ubicación y llegamos en minutos.
-          </p>
-          <a href="https://wa.me/584120000000" className="inline-block bg-white hover:bg-gray-100 text-green-600 px-12 py-5 rounded-xl font-black text-lg transition transform hover:scale-105 shadow-2xl">
-            📱 +58 412-000-0000
+      {/* CTA Final */}
+      <section className="py-20 px-6 lg:px-12 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent mb-6">
+            ¿Tienes un proyecto?
+          </h2>
+          <p className="text-xl text-gray-600 mb-10">Cotiza por WhatsApp y recibe atención personalizada</p>
+          <a href="https://wa.me/584120000000" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-full font-bold text-xl transition transform hover:scale-105 shadow-xl">
+            💬 Cotizar por WhatsApp
           </a>
         </div>
       </section>
 
       {/* Footer */}
-      <footer id="contacto" className="bg-gray-900 text-white py-16 px-6 lg:px-12">
-        <div className="max-w-[1800px] mx-auto">
+      <footer id="contacto" className="bg-gray-900 text-white py-16 px-6 lg:px-12 border-t-4 border-yellow-500">
+        <div className="max-w-[1600px] mx-auto">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 bg-yellow-400 rounded-2xl flex items-center justify-center text-3xl">🚖</div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="text-4xl">🏪</div>
                 <div>
-                  <h3 className="text-2xl font-black">TAXI<span className="text-yellow-400">EXPRESS</span></h3>
-                  <p className="text-xs text-gray-400">Punto Fijo, Falcón</p>
+                  <div className="text-2xl font-black">ProObra</div>
+                  <div className="text-xs text-gray-400">Ferretería</div>
                 </div>
               </div>
-              <p className="text-gray-400 mb-6 max-w-md">
-                Servicio de taxi confiable las 24 horas. Seguridad, puntualidad y confort en cada viaje.
-              </p>
+              <p className="text-gray-400 mb-6 max-w-md">Ferretería y proveedor de materiales para construcción, hogar, agricultura y proyectos profesionales en Punto Fijo.</p>
             </div>
-
             <div>
-              <h4 className="font-black text-lg mb-6">Servicios</h4>
-              <ul className="space-y-4 text-gray-400">
-                <li><a href="#" className="hover:text-yellow-400 transition">Standard</a></li>
-                <li><a href="#" className="hover:text-yellow-400 transition">Ejecutivo</a></li>
-                <li><a href="#" className="hover:text-yellow-400 transition">Van / Grupo</a></li>
-                <li><a href="#" className="hover:text-yellow-400 transition">Aeropuerto</a></li>
+              <h4 className="font-black text-lg mb-6">Categorías</h4>
+              <ul className="space-y-3 text-gray-400">
+                <li><a href="#" className="hover:text-yellow-500 transition">Construcción</a></li>
+                <li><a href="#" className="hover:text-yellow-500 transition">Electricidad</a></li>
+                <li><a href="#" className="hover:text-yellow-500 transition">Plomería</a></li>
+                <li><a href="#" className="hover:text-yellow-500 transition">Herramientas</a></li>
               </ul>
             </div>
-
             <div>
               <h4 className="font-black text-lg mb-6">Contacto</h4>
-              <ul className="space-y-4 text-gray-400">
-                <li>📞 0412-000-0000</li>
-                <li>📱 WhatsApp disponible</li>
+              <ul className="space-y-3 text-gray-400">
+                <li>💬 WhatsApp: +58 412-000-0000</li>
                 <li>📍 Punto Fijo, Falcón</li>
-                <li>🕒 24/7 todos los días</li>
+                <li>🕒 Lun-Sáb: 7AM - 6PM</li>
+                <li>✉️ ventas@proobra.com</li>
               </ul>
             </div>
           </div>
-
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-            © 2026 TaxiExpress. Hecho con 💚 por Carlos Ávila
-          </div>
+          <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">© 2026 ProObra Ferretería. Hecho con 💚 por Carlos Ávila - Developer 🇻🇪</div>
         </div>
       </footer>
     </div>
