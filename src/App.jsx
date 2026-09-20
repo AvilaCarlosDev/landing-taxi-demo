@@ -8,7 +8,7 @@ const rideTypes = [
     tagline: 'Rápido y económico',
     price: 'Desde $2',
     time: '3-6 min',
-    image: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=900&q=85&fit=crop',
+    image: '/img/foto-1558981806ec52.jpg',
     features: ['Ideal para tráfico', 'Casco incluido', 'Viajes cortos'],
   },
   {
@@ -16,7 +16,7 @@ const rideTypes = [
     tagline: 'Comodidad diaria',
     price: 'Desde $4',
     time: '4-8 min',
-    image: 'https://images.unsplash.com/photo-1449965408869-e421fed321f9?w=900&q=85&fit=crop',
+    image: '/img/sedan.jpg',
     features: ['Aire acondicionado', 'Conductores verificados', 'Pago móvil o efectivo'],
     featured: true,
   },
@@ -25,7 +25,7 @@ const rideTypes = [
     tagline: 'Traslados premium',
     price: 'Desde $7',
     time: '6-10 min',
-    image: 'https://images.unsplash.com/photo-1563720223185-11003d516935?w=900&q=85&fit=crop',
+    image: '/img/foto-15637202231851.jpg',
     features: ['Vehículos ejecutivos', 'Reservas programadas', 'Atención prioritaria'],
   },
 ]
@@ -67,21 +67,21 @@ const drivers = [
     role: 'Conductor Confort',
     rating: '4.98',
     trips: '3.240 viajes',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=85&fit=crop',
+    image: '/img/foto-15602500970b93.jpg',
   },
   {
     name: 'María Rivas',
     role: 'Taxi urbano',
     rating: '4.96',
     trips: '2.870 viajes',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=85&fit=crop',
+    image: '/img/foto-1494790108377b.jpg',
   },
   {
     name: 'Carlos Vera',
     role: 'Moto express',
     rating: '4.94',
     trips: '4.110 viajes',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=85&fit=crop',
+    image: '/img/foto-15006487677910.jpg',
   },
 ]
 
@@ -131,7 +131,7 @@ function App() {
       <main>
         <section id="inicio" className="relative isolate overflow-hidden bg-zinc-950 text-white">
           <img
-            src="https://images.unsplash.com/photo-1490650404312-a2175773bbf5?w=1900&q=85&fit=crop"
+            src="/img/foto-1490650404312a.jpg"
             alt="Taxi en ciudad de noche"
             className="absolute inset-0 -z-20 h-full w-full object-cover opacity-34"
           />
@@ -340,7 +340,7 @@ function App() {
               </a>
             </div>
             <div className="relative min-h-[420px]">
-              <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1100&q=85&fit=crop" alt="Vehículo ejecutivo" className="absolute inset-0 h-full w-full object-cover opacity-72" />
+              <img src="/img/foto-15686051170365.jpg" alt="Vehículo ejecutivo" className="absolute inset-0 h-full w-full object-cover opacity-72" />
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent" />
             </div>
           </div>
